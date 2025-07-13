@@ -1,6 +1,7 @@
 import admin from 'firebase-admin';
 import fs from 'fs';
 import path from 'path';
+import addProduct from './api/addProduct.js';
 
 const serviceAccount = JSON.parse(fs.readFileSync(path.resolve('./serviceAccount.json'), 'utf8'));
 
@@ -22,7 +23,7 @@ async function testFindProductByName() {
       .where('businessName', '==', 'badApple')
       .get();
 
-    // Check if the query found any results
+    // Check if the query found anything
     if (snapshot.empty) {
       console.log('Product not found');
     } else {
@@ -35,5 +36,4 @@ async function testFindProductByName() {
   }
 }
 
-// Run the test function
 testFindProductByName();
