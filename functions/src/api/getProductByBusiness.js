@@ -1,8 +1,8 @@
 import admin from 'firebase-admin';
 
-const db = admin.firestore();
-
 const getProduct = async (req, res) => {
+  const db = admin.firestore();
+
   const { businessName } = req.query;
 
   if (!businessName) {
@@ -23,4 +23,4 @@ const getProduct = async (req, res) => {
   }
 };
 
-export default getProduct; // Ensure the function is exported
+export default getProduct;

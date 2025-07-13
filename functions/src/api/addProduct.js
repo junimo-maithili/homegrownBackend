@@ -1,18 +1,12 @@
 import admin from 'firebase-admin';
 
-const addProduct = async (req, res) => {
+export default async function addProduct ({ businessName, productName, productPrice, productTags })  {
   try {
     const db = admin.firestore();
+    const productRef = await db.collection('products').add({businessName, productName, productPrice, productTags})
 
-    const { businessName, productName, productPrice, tags } = req.body;
-    const productRef = db.collection('products').doc(businessName);
-
-    await productRef.set({ businessName, productName, productPrice, tags });
-
-    res.status(200).send('Product added successfully');
   } catch (error) {
-    res.status(500).send('Error adding product: ' + error.message);
+    console.error("Error adding product.");
+    console.error(error);
   }
 };
-
-export default addProduct;
