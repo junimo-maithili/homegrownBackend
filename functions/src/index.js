@@ -11,7 +11,3 @@ const db = admin.firestore();
 
 export const createProduct = functions.https.onRequest(addProduct);
 export const findProductByBusiness = functions.https.onRequest(getProduct);
-
-findProductByBusinessName('badApple').then(product => {
-  console.log(product);
-});

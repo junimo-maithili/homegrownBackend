@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import addProduct from './api/addProduct.js';
 import express from 'express';
+import addBusiness from './api/addBusiness.js';
 
-process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'; 
 process.env.GOOGLE_CLOUD_PROJECT = 'homegrown-backend';
 
 
@@ -19,11 +19,17 @@ if (!admin.apps.length) {
 
 
 async function add() {
+  addBusiness({
+    businessName: "Dimitri",
+    businessTags: ["cool", "catchy", "NOT DAINSLEIF"]
+  });
+}
+
+async function addProd() {
   addProduct({
-    businessName: "Edelgard",
-    productName: "Seasons of Warfare", 
-    productPrice: 29,
-    productTags: ["cool", "catchy", "i knows all the lyrics"]
+    businessName: "Dimitri",
+    productName: "orange",
+    productPrice: 5.99
   });
 }
 
@@ -31,10 +37,12 @@ async function add() {
 async function testFindProductByName() {
   try {
     const db = admin.firestore();
+    const businessName = "Seasons of Warfare";
 
     // Query to find certain product name in products collection
+    const cleanBusinessName = businessName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     const snapshot = await db.collection('products')
-      .where('businessName', '==', 'badApple')
+      .where('productName', '==', 'Seasons of Warfare')
       .get();
 
     // Check if the query found anything
@@ -50,5 +58,5 @@ async function testFindProductByName() {
   }
 }
 
-add();
+addProd();
 //testFindProductByName();
