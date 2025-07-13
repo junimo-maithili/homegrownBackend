@@ -1,14 +1,17 @@
-import * as admin from 'firebase-admin';
+import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import addProduct from "./api/addProduct.js";
+import getProduct from './api/getProductByBusiness.js';
 
-// Initialize Firebase admin SDK first
 if (!admin.apps.length) {
   admin.initializeApp();
 }
 
-// Now that Firebase Admin is initialized, you can use Firestore.
 const db = admin.firestore();
 
-// Export the Cloud Function
 export const createProduct = functions.https.onRequest(addProduct);
+export const findProductByBusiness = functions.https.onRequest(getProduct);
+
+findProductByBusinessName('badApple').then(product => {
+  console.log(product);
+});
