@@ -6,7 +6,6 @@ export default async function addProduct ({ businessName, productName, productPr
     const db = admin.firestore();
     const cleanBusinessName = businessName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
     const cleanProductName = productName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
-    console.log("AHHHHHH: ", cleanBusinessName)
 
     const snapshot = await db.collection('products')
       .where('productName', '==', 'Seasons of Warfare')

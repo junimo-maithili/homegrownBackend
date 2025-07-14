@@ -4,6 +4,7 @@ import path from 'path';
 import addProduct from './api/addProduct.js';
 import express from 'express';
 import addBusiness from './api/addBusiness.js';
+import updateTags from './api/updateUserTags.js';
 
 process.env.GOOGLE_CLOUD_PROJECT = 'homegrown-backend';
 
@@ -19,10 +20,7 @@ if (!admin.apps.length) {
 
 
 async function add() {
-  addBusiness({
-    businessName: "Dimitri",
-    businessTags: ["cool", "catchy", "NOT DAINSLEIF"]
-  });
+  updateTags({userUID: "0kn3qzwa7McOu7q0v5syopeT9nF2", businessName: "Dimitri"});
 }
 
 async function addProd() {
@@ -57,6 +55,4 @@ async function testFindProductByName() {
     console.error('Error querying products:', error);
   }
 }
-
-addProd();
-//testFindProductByName();
+add();
